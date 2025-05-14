@@ -1,0 +1,38 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "My Products";
+}
+@*View that allows farmers to see the products they have added*@
+<div class="container">
+    <h2 class="white-text">My Products - @ViewBag.FarmerName</h2>
+
+    <div class="mb-3">
+        <a asp-action="AddProduct" class="btn btn-success">Add New Product</a>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            You haven't added any products yet.
+        </div>
+    }
+    else
+    {
+        <div class="row mt-5">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Category:</strong> @product.ProductCategory</p>
+                            <p class="card-text"><strong>Price:</strong> R @product.ProductPrice.ToString("N2")</p>
+                            <p class="card-text"><strong>Date:</strong> @product.ProductDate.ToShortDateString()</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+@*  //-----------================End of file=================--------------// *@

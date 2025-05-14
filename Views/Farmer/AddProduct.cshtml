@@ -1,0 +1,61 @@
+﻿@model GreenAgriHub.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+@*Form to handle adding a product*@
+<div class="container white-text">
+    <h2>Add New Product</h2>
+
+    <form asp-action="AddProduct" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="FarmerId" />
+
+        <div class="row">
+            <div class="col-md-6 white-text">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductName" class="form-label">Product Name</label>
+                    <input asp-for="ProductName" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductCategory" class="form-label">Category</label>
+                    <input asp-for="ProductCategory" class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductPrice" class="form-label">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R</span>
+                        <input asp-for="ProductPrice" type="number" step="0.01" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="ProductDate" class="form-label">Date</label>
+                    <input asp-for="ProductDate" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Add Product</button>
+            <a asp-action="ViewMyProducts" asp-route-farmerId="@Model.FarmerId" class="btn btn-secondary">Back to My Products</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

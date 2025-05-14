@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*Home page view if nobody is logged in*@
+<div class="text-center white-text">
+    <h1 class="display-4">Welcome to Green Agri Hub</h1>
+</div>
+
+<div class="container">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-200">
+                <div class="card-body">
+                    <h5 class="card-title">Your journey begins here</h5>
+                    <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

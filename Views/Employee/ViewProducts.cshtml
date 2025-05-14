@@ -1,0 +1,70 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "View Products";
+}
+
+<div class="container">
+    <h2>Products</h2>
+    
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Search and filter</h5>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="ViewProducts" method="get" class="row g-3">
+                <div class="col mb-4">
+                    <label class="form-label">Category</label>
+                    <select name="searchCategory" class="form-select">
+                        <option value="">All Categories</option>
+
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a asp-action="ViewProducts" class="btn btn-outline-secondary">Clear Filters</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    @*Displays no products if their are not any otherwise it displays the form*@
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">No Products</div>
+    }
+    else
+    {
+        <div class="row mt-5">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName</h5>
+                            <p class="card-text"><strong>Category:</strong> @product.ProductCategory</p>
+                            <p class="card-text"><strong>Price:</strong> R @product.ProductPrice.ToString("N2")</p>
+                            <p class="card-text"><strong>Date:</strong> @product.ProductDate.ToShortDateString()</p>
+                            <p class="card-text"><strong>Farmer:</strong> @product.Farmer.FarmerName @product.Farmer.FarmerSurname</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

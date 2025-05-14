@@ -1,0 +1,68 @@
+﻿@model GreenAgriHub.Models.Farmer
+
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+<div class=container>
+    <h2>Add new farmer</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+    @*Form to handle the adding a farmer*@
+    <form asp-action="AddFarmer" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="=col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="FarmerName" class="form-label">Farmer Name</label>
+                    <input asp-for="FarmerName" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="=col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="FarmerSurname" class="form-label">Farmer Surname</label>
+                    <input asp-for="FarmerSurname" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="FarmerEmail" class="form-label">Email</label>
+                    <input asp-for="FarmerEmail" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="FarmerPhone" class="form-label">Number</label>
+                    <input asp-for="FarmerPhone" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="FarmerPassword" class="form-label">Password</label>
+                    <input asp-for="FarmerPassword" class="form-control" required>
+                </div>
+            </div>
+
+
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Add Farmer</button>
+                <a asp-action="ViewProducts" class="btn btn-outline-success">Back to products</a>
+            </div>
+        </div>
+    </form>
+</div>
